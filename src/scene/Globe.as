@@ -1,31 +1,28 @@
-package scene
-{
-	import aerys.minko.render.effect.basic.BasicEffect;
-	import aerys.minko.scene.node.group.EffectGroup;
-	
-	import scene.mesh.PointsCloudMesh;
+/**
+ * Created with IntelliJ IDEA.
+ * User: dumand
+ * Date: 05/11/12
+ * Time: 11:19
+ * To change this template use File | Settings | File Templates.
+ */
+package scene {
+import aerys.minko.render.Effect;
+import aerys.minko.render.material.Material;
+import aerys.minko.scene.node.Group;
+import aerys.minko.scene.node.Mesh;
 
-	public class Globe extends EffectGroup
-	{
-		private static const NUM_POINTS_PER_MESH	: uint		= 8000;
-		private static const DEFAULT_SCALE			: Number	= 130.;
-				
-		private var _currentCloud	: PointsCloudMesh	= null;
-		
-		public function Globe()
-		{
-			super(new BasicEffect());
-		}
-		
-		public function addPoint(latitude	: Number,
-								 longitude	: Number,
-								 value		: Number,
-								 color		: uint) : void
-		{
-			if (!_currentCloud || _currentCloud.numPoints > NUM_POINTS_PER_MESH)
-				addChild(_currentCloud = new PointsCloudMesh());
-			
-			_currentCloud.addPoint(latitude, longitude, value, color);
-		}
-	}
+import effect.SimpleShader;
+
+import scene.mesh.PointsCloudGeometry;
+
+public class Globe extends Group {
+
+    private static const DEFAULT_SCALE:Number = .005;
+
+
+    public function init(datas:Array):void {
+        addChild(new Mesh(new PointsCloudGeometry(datas), new Material(new Effect(new SimpleShader()))));
+        this.transform.appendUniformScale(DEFAULT_SCALE);
+    }
+}
 }
