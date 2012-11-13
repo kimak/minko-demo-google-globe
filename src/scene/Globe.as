@@ -17,7 +17,7 @@ import scene.mesh.PointsCloudGeometry;
 
 public class Globe extends Group {
 
-    private static const DEFAULT_SCALE:Number = .005;
+    private static const DEFAULT_SCALE:Number = .003;
 
 
     public function init(datas:Array):void {

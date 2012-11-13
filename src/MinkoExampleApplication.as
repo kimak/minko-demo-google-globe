@@ -10,9 +10,11 @@ import flash.events.Event;
 import flash.geom.Point;
 
 public class MinkoExampleApplication extends Sprite {
-    private var _viewport:Viewport = new Viewport();
-    private var _camera:Camera = null;
+    private var _viewport:Viewport = new Viewport(3);
     private var _cameraController:ArcBallController = null;
+
+    protected var _camera:Camera = null;
+    protected var _activeCameraController:Boolean=true;
 
     protected var _scene:Scene = new Scene();
 
@@ -54,15 +56,19 @@ public class MinkoExampleApplication extends Sprite {
         stage.addEventListener(Event.ENTER_FRAME, enterFrameHandler);
     }
 
-    protected function initializeScene():void {
+    protected function initializeScene():void{
         _camera = new Camera();
-        _cameraController = new ArcBallController();
-        _cameraController.bindDefaultControls(stage);
-        _cameraController.minDistance = 1;
-        _cameraController.yaw = Math.PI * -.5;
-        _cameraController.pitch = Math.PI / 2;
-        _cameraController.distance = 5;
-        camera.addController(_cameraController);
+
+        if(_activeCameraController)
+        {
+            _cameraController = new ArcBallController();
+            _cameraController.bindDefaultControls(stage);
+            _cameraController.minDistance = 1;
+            _cameraController.yaw = Math.PI * -.5;
+            _cameraController.pitch = Math.PI / 2;
+            _cameraController.distance = 5;
+            camera.addController(_cameraController);
+        }
 
         _scene.addChild(camera);
 

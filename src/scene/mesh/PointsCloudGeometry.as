@@ -56,7 +56,8 @@ public class PointsCloudGeometry extends Geometry {
         transform.appendScale(.35, .35, size || .1)
                 .appendTranslation(radius * Math.sin(phi) * Math.cos(theta),
                 radius * Math.cos(phi),
-                -radius * Math.sin(phi) * Math.sin(theta)).lookAt(Vector4.ZERO);
+                -radius * Math.sin(phi) * Math.sin(theta))
+//                .lookAt(Vector4.ZERO);
 
         TMP_VERTICES.length = 0;
         transform.transformRawVectors(VERTICES, TMP_VERTICES);
